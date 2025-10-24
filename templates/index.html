@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-4"><i class="fas fa-wallet"></i> Expense Tracker AI</h1>
+    <p class="lead">Smart expense tracking with AI-powered categorization and insights</p>
+    <div class="mt-4">
+        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-2">Get Started</a>
+        <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg">Login</a>
+    </div>
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <i class="fas fa-robot fa-3x text-primary"></i>
+            <h4 class="mt-3">AI Categorization</h4>
+            <p>Automatically categorize expenses using AI</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-camera fa-3x text-primary"></i>
+            <h4 class="mt-3">Receipt Scanning</h4>
+            <p>Upload receipts and extract data with OCR</p>
+        </div>
+        <div class="col-md-4">
+            <i class="fas fa-chart-line fa-3x text-primary"></i>
+            <h4 class="mt-3">Smart Analytics</h4>
+            <p>Get insights and alerts on your spending</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
