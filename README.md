@@ -63,14 +63,29 @@ The application is **FULLY CONFIGURED** and ready to run! All dependencies are p
    http://localhost:5000
    ```
 
-### Fresh Installation (if needed)
+### Fresh Installation
 
-1. **Install dependencies**
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Tharun9905/Expense_Tracker_AI.git
+   cd Expense_Tracker_AI
+   ```
+
+2. **Install dependencies**
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Run the application**
+3. **Set up environment variables**
+   ```bash
+   # Copy the template file
+   cp .env.template .env
+   
+   # Edit .env with your email configuration (optional)
+   # The app works without email configuration
+   ```
+
+4. **Run the application**
    ```bash
    python app.py
    ```
@@ -106,40 +121,49 @@ The application is **FULLY CONFIGURED** and ready to run! All dependencies are p
 ## Project Structure
 
 ```
-expense_tracker_ai/
+Expense_Tracker_AI/
 │
-├── app.py                      # Main Flask application
-├── requirements.txt            # Python dependencies
-├── README.md                   # This file
+├── app.py                        # Main Flask application
+├── requirements.txt              # Python dependencies
+├── README.md                     # This file
+├── .env.template                 # Environment variables template
+├── .gitignore                    # Git ignore rules
+├── run.bat, run.ps1, run.sh      # Startup scripts
 │
 ├── models/
-│   └── database.py            # Database setup
+│   ├── __init__.py
+│   └── database.py              # Database setup and models
 │
 ├── utils/
-│   ├── ocr_processor.py       # Receipt OCR
-│   ├── ai_categorizer.py      # AI categorization
-│   ├── alerts.py              # Budget alerts
-│   └── analytics.py           # Analytics
+│   ├── __init__.py
+│   ├── ai_categorizer.py        # AI-powered expense categorization
+│   ├── alerts.py                # Budget alerts and anomaly detection
+│   ├── analytics.py             # Spending analytics and reports
+│   ├── currency_formatter.py    # Currency formatting utilities
+│   ├── email_service.py         # Email notification service
+│   ├── enhanced_email_service.py # Advanced email templates
+│   └── ocr_processor.py         # Receipt OCR processing
 │
-├── templates/                  # HTML templates
-│   ├── base.html
-│   ├── index.html
-│   ├── login.html
-│   ├── register.html
-│   ├── dashboard.html
-│   ├── add_transaction.html
-│   ├── upload_receipt.html
-│   ├── transactions.html
-│   ├── analytics.html
-│   └── budgets.html
+├── templates/                    # HTML templates
+│   ├── base.html                # Base template with navigation
+│   ├── index.html               # Landing page
+│   ├── login.html               # User login
+│   ├── register.html            # User registration
+│   ├── dashboard.html           # Main dashboard
+│   ├── add_transaction.html     # Add transactions
+│   ├── upload_receipt.html      # Receipt upload
+│   ├── transactions.html        # Transaction history
+│   ├── analytics.html           # Analytics and reports
+│   ├── budgets.html             # Budget management
+│   └── notifications.html       # Email notification settings
 │
-├── static/                     # Static files
-│   ├── css/style.css
-│   ├── js/main.js
-│   └── uploads/               # Receipt uploads
+├── static/                       # Static assets
+│   ├── css/style.css            # Application styles
+│   ├── js/main.js               # JavaScript functionality
+│   └── uploads/.gitkeep         # Receipt uploads directory
 │
 └── data/
-    └── expense_tracker.db     # SQLite database
+    └── expense_tracker.db       # SQLite database (auto-created)
 ```
 
 ## Features Included from PPT
@@ -157,16 +181,52 @@ expense_tracker_ai/
 ✅ Category-wise Breakdown
 ✅ Date-based Analytics
 
+## Email Configuration (Optional)
+
+The application includes email notification features that are **completely optional**. The app works perfectly without email configuration.
+
+### To Enable Email Notifications:
+
+1. **Copy the environment template:**
+   ```bash
+   cp .env.template .env
+   ```
+
+2. **Choose your email provider and update .env:**
+
+   **For Gmail:**
+   ```
+   SMTP_SERVER=smtp.gmail.com
+   SMTP_PORT=587
+   SMTP_USERNAME=your-email@gmail.com
+   SMTP_PASSWORD=your-app-password
+   ```
+
+   **For SendGrid:**
+   ```
+   SMTP_SERVER=smtp.sendgrid.net
+   SMTP_PORT=587
+   SMTP_USERNAME=apikey
+   SMTP_PASSWORD=your-sendgrid-api-key
+   ```
+
+3. **Test email functionality in the app's Notifications page**
+
+**Note:** All features work without email configuration. Email is only for budget alerts and daily summaries.
+
 ## Troubleshooting
 
 **Issue: Tesseract not found**
-**Solution:** Install Tesseract OCR and add to PATH
+**Solution:** Install Tesseract OCR and add to PATH, or use the app without OCR (manual entry works fine)
 
 **Issue: Database errors**
 **Solution:** Delete `data/expense_tracker.db` and restart
 
 **Issue: Port already in use**
 **Solution:** Change port in `app.py`: `app.run(port=5001)`
+
+**Issue: Email not working**
+**Solution:** Check .env configuration or disable email features - the app works perfectly without them
 
 ## Credits
 
