@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-bell"></i> Email Notification Settings</h4>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-exclamation-triangle"></i> Alert Notifications</h5>
+                            
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="budget_alerts_email" 
+                                       name="budget_alerts_email" 
+                                       {{ 'checked' if preferences.budget_alerts_email else '' }}>
+                                <label class="form-check-label" for="budget_alerts_email">
+                                    <strong>Budget Alerts</strong><br>
+                                    <small class="text-muted">Get notified when you approach or exceed your budget limits</small>
+                                </label>
+                            </div>
+                            
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="anomaly_alerts_email" 
+                                       name="anomaly_alerts_email" 
+                                       {{ 'checked' if preferences.anomaly_alerts_email else '' }}>
+                                <label class="form-check-label" for="anomaly_alerts_email">
+                                    <strong>Unusual Spending Alerts</strong><br>
+                                    <small class="text-muted">Get notified about unusual or large transactions</small>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-chart-bar"></i> Summary Reports</h5>
+                            
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="daily_summary_email" 
+                                       name="daily_summary_email" 
+                                       {{ 'checked' if preferences.daily_summary_email else '' }}>
+                                <label class="form-check-label" for="daily_summary_email">
+                                    <strong>Daily Summary</strong><br>
+                                    <small class="text-muted">Receive a daily report of your transactions and spending</small>
+                                </label>
+                            </div>
+                            
+                            <div class="form-check mb-3">
+                                <input type="checkbox" class="form-check-input" id="weekly_summary_email" 
+                                       name="weekly_summary_email" 
+                                       {{ 'checked' if preferences.weekly_summary_email else '' }}>
+                                <label class="form-check-label" for="weekly_summary_email">
+                                    <strong>Weekly Summary</strong><br>
+                                    <small class="text-muted">Receive a weekly report with spending analysis and trends</small>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    
+                    <div class="alert alert-info" id="setup-info">
+                        <div id="email-configured" style="display: none;">
+                            <h6><i class="fas fa-check-circle"></i> Professional Email System Active!</h6>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <p class="mb-2">✅ <strong>Professional Email:</strong> expensetracker@gmail.com</p>
+                                    <p class="mb-2">✅ <strong>Enhanced Features:</strong> Budget alerts, daily summaries, professional templates</p>
+                                    <p class="mb-0">✅ <strong>Ready to Use:</strong> Configure preferences above and test your setup</p>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <a href="{{ url_for('test_all_email_templates') }}" class="btn btn-success btn-sm">
+                                        <i class="fas fa-flask"></i> Test All Templates
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="email-not-configured">
+                            <h6><i class="fas fa-rocket"></i> Professional Email Setup:</h6>
+                            <p class="mb-2">Complete your professional email setup with one command:</p>
+                            <div class="bg-light p-3 rounded mb-3">
+                                <code style="font-size: 16px; color: #2c3e50;">python complete_email_setup.py</code>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-success">✨ What You'll Get:</h6>
+                                    <ul class="mb-2">
+                                        <li>Professional email: expensetracker@gmail.com</li>
+                                        <li>Enhanced HTML templates</li>
+                                        <li>Budget alerts & daily summaries</li>
+                                        <li>Node Mailer-like features</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-info">🔧 Quick Setup:</h6>
+                                    <ol class="mb-2">
+                                        <li>Create Gmail account</li>
+                                        <li>Enable 2-Factor Auth</li>
+                                        <li>Generate App Password</li>
+                                        <li>Test & go live!</li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <small class="text-muted">
+                                    <strong>Automated Setup:</strong> The script will guide you through each step and open the necessary pages automatically.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Preferences
+                        </button>
+                        <div class="btn-group">
+                            <a href="{{ url_for('send_test_email') }}" class="btn btn-outline-secondary">
+                                <i class="fas fa-paper-plane"></i> Basic Test Email
+                            </a>
+                            <a href="{{ url_for('send_enhanced_test_email') }}" class="btn btn-outline-primary">
+                                <i class="fas fa-rocket"></i> Enhanced Test Email
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5><i class="fas fa-envelope"></i> Email Examples</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6>Budget Alert Email</h6>
+                        <div class="border p-2 small text-muted">
+                            <strong>Subject:</strong> ⚠️ Budget Alert - Expense Tracker<br>
+                            Budget exceeded for Food! Spent: $650.00 / $500.00
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h6>Daily Summary Email</h6>
+                        <div class="border p-2 small text-muted">
+                            <strong>Subject:</strong> 📊 Daily Summary - 2024-01-15<br>
+                            Income: $0.00, Expenses: $45.50, Net: -$45.50
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Check email configuration status
+function checkEmailConfiguration() {
+    fetch('/api/email-status')
+        .then(response => response.json())
+        .then(data => {
+            const configuredDiv = document.getElementById('email-configured');
+            const notConfiguredDiv = document.getElementById('email-not-configured');
+            const setupInfo = document.getElementById('setup-info');
+            
+            if (data.configured) {
+                configuredDiv.style.display = 'block';
+                notConfiguredDiv.style.display = 'none';
+                setupInfo.className = 'alert alert-success';
+            } else {
+                configuredDiv.style.display = 'none';
+                notConfiguredDiv.style.display = 'block';
+                setupInfo.className = 'alert alert-warning';
+            }
+        })
+        .catch(() => {
+            // Keep default state if API fails
+            console.log('Could not check email configuration status');
+        });
+}
+
+// Check on page load
+document.addEventListener('DOMContentLoaded', checkEmailConfiguration);
+</script>
+{% endblock %}
