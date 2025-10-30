@@ -4,3 +4,4 @@ Pillow==10.1.0
 pytesseract==0.3.10
 Flask-Mail==0.9.1
 python-dotenv==1.0.0
+python-dateutil==2.8.2
