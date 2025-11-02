@@ -66,5 +66,17 @@ def init_db():
         FOREIGN KEY (user_id) REFERENCES users (id)
     )''')
 
+    # Track email alerts sent to prevent duplicates
+    cursor.execute('''CREATE TABLE IF NOT EXISTS email_alert_history (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        alert_type TEXT NOT NULL,
+        category TEXT NOT NULL,
+        sent_date TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (user_id) REFERENCES users (id),
+        UNIQUE(user_id, alert_type, category, sent_date)
+    )''')
+
     conn.commit()
     conn.close()
