@@ -76,11 +76,11 @@ def check_budget_alerts(user_id):
     if alerts_to_send:
         try:
             send_budget_alert_email(user_id, alerts_to_send)
-            print(f"✅ Budget alert email sent for {len(alerts_to_send)} category/categories")
+            print(f"Budget alert email sent for {len(alerts_to_send)} category/categories")
         except Exception as e:
             print(f"Failed to send budget alert email: {e}")
     else:
-        print(f"📧 Budget alert already sent today for all triggered categories")
+        print("Budget alert already sent today for all triggered categories")
     
     conn.close()
     return alerts
@@ -121,12 +121,12 @@ def detect_anomalies(user_id):
     if anomalies_to_send:
         try:
             send_anomaly_alert_email(user_id, anomalies_to_send)
-            print(f"✅ Anomaly alert email sent for {len(anomalies_to_send)} anomaly/anomalies")
+            print(f"Anomaly alert email sent for {len(anomalies_to_send)} anomaly/anomalies")
         except Exception as e:
             print(f"Failed to send anomaly alert email: {e}")
     else:
         if anomalies:
-            print(f"📧 Anomaly alert already sent today for this category")
+            print("Anomaly alert already sent today for this category")
     
     conn.close()
     return anomalies

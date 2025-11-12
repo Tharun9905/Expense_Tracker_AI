@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from models.database import init_db, get_db_connection
-from utils.ocr_processor import extract_receipt_data
+from utils.easyocr_processor import extract_receipt_data
 from utils.ai_categorizer import categorize_expense, predict_category
 from utils.alerts import check_budget_alerts, detect_anomalies
 from utils.analytics import generate_spending_report, get_category_breakdown
